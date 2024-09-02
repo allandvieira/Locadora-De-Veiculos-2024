@@ -12,5 +12,5 @@ public interface IRepositorio<TEntidade> where TEntidade : EntidadeBase
 
     List<TEntidade> SelecionarTodos();
 
-    List<TEntidade> Filtrar(Func<TEntidade, bool> predicate);
+    //List<TEntidade> Filtrar(Func<TEntidade, bool> predicate);
 }
