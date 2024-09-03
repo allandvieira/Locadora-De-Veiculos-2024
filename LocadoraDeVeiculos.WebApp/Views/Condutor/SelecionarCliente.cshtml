@@ -1,0 +1,35 @@
+﻿@model SelecionarClienteViewModel
+
+@{
+    ViewBag.Title = "Inserir Novo Condutor";
+}
+
+<div class="col">
+    <div class="row gap-3 my-3 my-xl-5">
+        <form class="col-lg-6 d-grid gap-3 fs-5" asp-action="SelecionarCliente">
+            <div>
+                <label class="control-label fw-semibold mb-1">Cliente</label>
+                <select class="form-control mb-1" asp-for="ClienteId" asp-items="Model.Clientes"></select>
+                <span class="text-danger fs-6" asp-validation-for="ClienteId"></span>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input mb-1" type="checkbox" asp-for="ClienteCondutor" />
+                <label class="form-check-label fw-semibold mb-1">O cliente será o condutor</label>
+                <span class="text-danger fs-6" asp-validation-for="ClienteCondutor"></span>
+            </div>
+
+            <div class="d-grid gap-2 d-md-block mt-4">
+                <button class="btn btn-primary px-5">
+                    <i class="bi bi-arrow-return-right me-1"></i>
+                    Avançar
+                </button>
+
+                <a class="btn btn-outline-primary px-5" asp-action="Listar">
+                    <i class="bi bi-arrow-return-left me-1"></i>
+                    Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

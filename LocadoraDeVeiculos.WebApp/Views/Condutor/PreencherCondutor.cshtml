@@ -1,0 +1,79 @@
+﻿@model FormularioCondutorViewModel
+
+@{
+    ViewBag.Title = $"Inserir Condutor para {ViewBag.ClienteSelecionado}";
+
+    var campoSomenteLeitura = Model.ClienteCondutor;
+}
+
+<div class="col">
+    <div class="row gap-3 my-3 my-xl-5">
+        <form class="col-lg-6 d-grid gap-3 fs-5" asp-action="PreencherCondutor">
+            <div class="row gap-2 align-items-end">
+                <div class="col-lg-3">
+                    <label class="control-label fw-semibold mb-1">Cliente</label>
+                    <input class="form-control mb-1" asp-for="ClienteId" readonly>
+                    <span class="text-danger fs-6" asp-validation-for="ClienteId"></span>
+                </div>
+
+                <div class="col">
+                    <div class="form-check">
+                        <input class="form-check-input mb-1" type="checkbox" asp-for="ClienteCondutor" disabled />
+                        <input class="form-check-input mb-1" type="checkbox" asp-for="ClienteCondutor" hidden />
+                        <label class="form-check-label fw-semibold mb-1">O cliente será o condutor</label>
+                        <span class="text-danger fs-6" asp-validation-for="ClienteCondutor"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Nome</label>
+                <input class="form-control mb-1" asp-for="Nome" readonly="@campoSomenteLeitura" />
+                <span class="text-danger fs-6" asp-validation-for="Nome"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Email</label>
+                <input class="form-control mb-1" asp-for="Email" type="email" readonly="@campoSomenteLeitura" />
+                <span class="text-danger fs-6" asp-validation-for="Email"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Telefone</label>
+                <input class="form-control mb-1" asp-for="Telefone" readonly="@campoSomenteLeitura" />
+                <span class="text-danger fs-6" asp-validation-for="Telefone"></span>
+            </div>
+
+
+            <div>
+                <label class="control-label fw-semibold mb-1">CPF</label>
+                <input class="form-control mb-1" asp-for="CPF" readonly="@campoSomenteLeitura" />
+                <span class="text-danger fs-6" asp-validation-for="CPF"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">CNH</label>
+                <input class="form-control mb-1" asp-for="CNH" />
+                <span class="text-danger fs-6" asp-validation-for="CNH"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Validade da CNH</label>
+                <input class="form-control mb-1" asp-for="ValidadeCNH" type="date" />
+                <span class="text-danger fs-6" asp-validation-for="ValidadeCNH"></span>
+            </div>
+
+            <div class="d-grid gap-2 d-md-block mt-4">
+                <button class="btn btn-primary px-5">
+                    <i class="bi bi-floppy-fill me-1"></i>
+                    Gravar
+                </button>
+
+                <a class="btn btn-outline-primary px-5" asp-action="Listar">
+                    <i class="bi bi-arrow-return-left me-1"></i>
+                    Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
