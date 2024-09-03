@@ -8,7 +8,13 @@
 
 <div class="col">
     <div class="row gap-3 my-3 my-xl-5">
-        <form class="col-lg-6 d-grid gap-3 fs-5" asp-action="Inserir">
+        <form class="col-lg-6 d-grid gap-3 fs-5" asp-action="Inserir" enctype="multipart/form-data">
+            <div>
+                <label asp-for="Foto" class="control-label"></label>
+                <input asp-for="Foto" class="form-control" type="file" accept="image/jpeg" />
+                <span asp-validation-for="Foto" class="text-danger"></span>
+            </div>
+
             <div>
                 <label class="control-label fw-semibold mb-1">Modelo</label>
                 <input class="form-control mb-1" asp-for="Modelo" />

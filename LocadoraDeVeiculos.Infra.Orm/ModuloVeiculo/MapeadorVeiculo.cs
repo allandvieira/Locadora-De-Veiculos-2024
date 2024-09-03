@@ -31,6 +31,10 @@ public class MapeadorVeiculo : IEntityTypeConfiguration<Veiculo>
             .HasColumnType("int")
             .IsRequired();
 
+        builder.Property(v => v.Foto)
+            .HasColumnType("varbinary(max)")
+            .HasDefaultValue(Array.Empty<byte>());
+
         builder.Property(v => v.GrupoVeiculosId)
             .HasColumnType("int")
             .IsRequired();

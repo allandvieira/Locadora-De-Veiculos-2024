@@ -14,7 +14,11 @@
     <div class="row gap-2 my-3 my-xl-5">
         @foreach (var veiculoVm in Model)
         {
-            <div class="card col-lg-4 col-xl-3">
+            <div class="card col-lg-4 col-xl-3 px-0">
+                <img src="@Url.Action("ObterFoto", "Veiculo", new { id = veiculoVm.Id })"
+                     alt="@veiculoVm.Modelo"
+                     class="card-img-top" />
+
                 <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
                     <h5 class="p-0">@veiculoVm.Id</h5>
 

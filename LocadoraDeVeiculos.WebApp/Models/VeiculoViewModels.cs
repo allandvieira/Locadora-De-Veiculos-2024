@@ -24,6 +24,9 @@ public class FormularioVeiculoViewModel
     public int GrupoVeiculosId { get; set; }
 
     public IEnumerable<SelectListItem>? GruposVeiculos { get; set; }
+
+    [Required(ErrorMessage = "A foto é obrigatória")]
+    public IFormFile Foto { get; set; }
 }
 
 public class InserirVeiculoViewModel : FormularioVeiculoViewModel { }
