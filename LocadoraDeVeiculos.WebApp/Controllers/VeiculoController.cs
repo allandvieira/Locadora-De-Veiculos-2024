@@ -95,11 +95,6 @@ public class VeiculoController : WebControllerBase
 
         var editarVm = mapeador.Map<EditarVeiculoViewModel>(veiculo);
 
-        var gruposDisponiveis = resultadoGrupos.Value;
-
-        editarVm.GruposVeiculos = gruposDisponiveis
-            .Select(g => new SelectListItem(g.Nome, g.Id.ToString()));
-
         return View(editarVm);
     }
 
@@ -209,15 +204,7 @@ public class VeiculoController : WebControllerBase
         var gruposDisponiveis = resultadoGrupos.Value;
 
         if (dadosPrevios is null)
-        {
-            var formularioVm = new FormularioVeiculoViewModel
-            {
-                GruposVeiculos = gruposDisponiveis
-                    .Select(g => new SelectListItem(g.Nome, g.Id.ToString()))
-            };
-
-            return formularioVm;
-        }
+            dadosPrevios = new FormularioVeiculoViewModel();
 
         dadosPrevios.GruposVeiculos = gruposDisponiveis
             .Select(g => new SelectListItem(g.Nome, g.Id.ToString()));

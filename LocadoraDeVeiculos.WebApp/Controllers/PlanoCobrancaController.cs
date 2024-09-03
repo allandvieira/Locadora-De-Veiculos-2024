@@ -85,11 +85,6 @@ public class PlanoCobrancaController : WebControllerBase
 
         var editarVm = mapeador.Map<EditarPlanoCobrancaViewModel>(planoCobranca);
 
-        var grupos = servicoGrupos.SelecionarTodos().Value;
-
-        editarVm.GruposVeiculos = grupos
-            .Select(g => new SelectListItem(g.Nome, g.Id.ToString()));
-
         return View(editarVm);
     }
 
@@ -180,15 +175,7 @@ public class PlanoCobrancaController : WebControllerBase
         }
 
         if (dadosPrevios is null)
-        {
-            var formularioVm = new FormularioPlanoCobrancaViewModel
-            {
-                GruposVeiculos = resultadoGrupos.Value
-                    .Select(g => new SelectListItem(g.Nome, g.Id.ToString()))
-            };
-
-            return formularioVm;
-        }
+            dadosPrevios = new FormularioPlanoCobrancaViewModel();
 
         dadosPrevios.GruposVeiculos = resultadoGrupos.Value
             .Select(g => new SelectListItem(g.Nome, g.Id.ToString()));
