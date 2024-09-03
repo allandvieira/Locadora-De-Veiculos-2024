@@ -13,7 +13,7 @@ public class VeiculoTests
         (
             "Modelo A",
             "Marca X",
-            TipoCombustivel.Gasolina,
+            TipoCombustivelEnum.Gasolina,
             50,
             1
         );
@@ -30,7 +30,7 @@ public class VeiculoTests
         (
             "",
             "",
-            TipoCombustivel.Gasolina,
+            TipoCombustivelEnum.Gasolina,
             0,
             0
         );

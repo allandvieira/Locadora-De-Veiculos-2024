@@ -23,7 +23,7 @@
 
             <div>
                 <label class="control-label fw-semibold mb-1">Tipo de Combustível</label>
-                <select class="form-control mb-1" asp-for="TipoCombustivel" asp-items="Html.GetEnumSelectList<TipoCombustivel>()"></select>
+                <select class="form-control mb-1" asp-for="TipoCombustivel" asp-items="Html.GetEnumSelectList<TipoCombustivelEnum>()"></select>
                 <span class="text-danger fs-6" asp-validation-for="TipoCombustivel"></span>
             </div>
 

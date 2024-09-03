@@ -7,7 +7,7 @@ public class Veiculo : EntidadeBase
 {
     public string Modelo { get; set; }
     public string Marca { get; set; }
-    public TipoCombustivel TipoCombustivel { get; set; }
+    public TipoCombustivelEnum TipoCombustivel { get; set; }
     public int CapacidadeTanque { get; set; }
     public byte[] Foto { get; set; }
 
@@ -19,7 +19,7 @@ public class Veiculo : EntidadeBase
     public Veiculo(
         string modelo,
         string marca,
-        TipoCombustivel tipoCombustivel,
+        TipoCombustivelEnum tipoCombustivel,
         int capacidadeTanque,
         int grupoVeiculosId
     )

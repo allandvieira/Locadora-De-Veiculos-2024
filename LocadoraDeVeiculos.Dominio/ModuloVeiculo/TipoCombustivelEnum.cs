@@ -1,6 +1,6 @@
 ﻿namespace LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 
-public enum TipoCombustivel
+public enum TipoCombustivelEnum
 {
     Alcool,
     Diesel,

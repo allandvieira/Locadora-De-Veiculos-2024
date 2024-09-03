@@ -1,4 +1,5 @@
 ﻿using LocadoraDeVeiculos.Dominio.ModuloCliente;
+using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoVeiculos;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
@@ -17,6 +18,7 @@ public class LocadoraDbContext : DbContext
     public DbSet<Taxa> Taxas { get; set; }
     public DbSet<Cliente> Clientes { get; set; }
     public DbSet<Condutor> Condutores { get; set; }
+    public DbSet<ConfiguracaoCombustivel> ConfiguracoesCombustiveis { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
