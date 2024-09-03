@@ -1,0 +1,11 @@
+﻿@model DetalhesTaxaViewModel
+
+<div class="row gap-3 my-3 my-xl-5">
+    <label class="fs-4"><strong>Nome:</strong> @Model.Nome</label>
+
+    <label class="fs-4"><strong>Valor:</strong> @Model.Valor.ToString("C2")</label>
+
+    <label class="fs-4"><strong>Tipo de Cobrança:</strong> @Model.TipoCobranca</label>
+
+    <label class="fs-5"><strong>Id:</strong> [@Model.Id]</label>
+</div>

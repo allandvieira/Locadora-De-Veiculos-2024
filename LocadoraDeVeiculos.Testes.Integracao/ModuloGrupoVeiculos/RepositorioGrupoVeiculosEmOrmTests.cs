@@ -29,7 +29,6 @@ public class RepositorioGrupoVeiculosEmOrmTests
     {
         var grupo = Builder<GrupoVeiculos>
             .CreateNew()
-            .With(g => g.Id = 0)
             .Persist();
 
         var grupoSelecionado = repositorio.SelecionarPorId(grupo.Id);
@@ -43,7 +42,6 @@ public class RepositorioGrupoVeiculosEmOrmTests
     {
         var grupo = Builder<GrupoVeiculos>
             .CreateNew()
-            .With(g => g.Id = 0)
             .Persist();
 
         grupo.Nome = "Teste de Edição";
@@ -60,7 +58,6 @@ public class RepositorioGrupoVeiculosEmOrmTests
     {
         var grupo = Builder<GrupoVeiculos>
             .CreateNew()
-            .With(g => g.Id = 0)
             .Persist();
 
         repositorio.Excluir(grupo);
