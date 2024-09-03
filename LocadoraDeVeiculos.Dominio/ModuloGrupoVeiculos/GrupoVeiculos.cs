@@ -1,12 +1,11 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloGrupoVeiculos;
 
 public class GrupoVeiculos : EntidadeBase
 {
-    protected GrupoVeiculos()
-    {
-    }
+    protected GrupoVeiculos() { }
 
     public GrupoVeiculos(string nome)
     {
@@ -14,6 +13,7 @@ public class GrupoVeiculos : EntidadeBase
     }
 
     public string Nome { get; set; }
+    public List<Veiculo> Veiculos { get; set; } = [];
 
     public override List<string> Validar()
     {
