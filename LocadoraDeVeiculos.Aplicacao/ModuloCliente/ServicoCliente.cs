@@ -80,5 +80,4 @@ public class ServicoCliente
 
         return Result.Ok(clientes);
     }
-
 }

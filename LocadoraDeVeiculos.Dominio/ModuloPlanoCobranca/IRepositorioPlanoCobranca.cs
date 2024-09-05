@@ -4,4 +4,5 @@ namespace LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 
 public interface IRepositorioPlanoCobranca : IRepositorio<PlanoCobranca>
 {
+    PlanoCobranca? FiltrarPlano(Func<PlanoCobranca, bool> predicate);
 }

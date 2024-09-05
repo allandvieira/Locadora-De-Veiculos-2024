@@ -29,4 +29,12 @@ public class RepositorioPlanoCobrancaEmOrm : RepositorioBaseEmOrm<PlanoCobranca>
             .AsNoTracking()
             .ToList();
     }
+
+    public PlanoCobranca? FiltrarPlano(Func<PlanoCobranca, bool> predicate)
+    {
+        return ObterRegistros()
+            .Include(p => p.GrupoVeiculos)
+            .Where(predicate)
+            .FirstOrDefault();
+    }
 }
