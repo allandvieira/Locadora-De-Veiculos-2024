@@ -74,9 +74,9 @@ public class ServicoCliente
         return Result.Ok(cliente);
     }
 
-    public Result<List<Cliente>> SelecionarTodos()
+    public Result<List<Cliente>> SelecionarTodos(int empresaId)
     {
-        var clientes = repositorioCliente.SelecionarTodos();
+        var clientes = repositorioCliente.Filtrar(c => c.EmpresaId == empresaId);
 
         return Result.Ok(clientes);
     }

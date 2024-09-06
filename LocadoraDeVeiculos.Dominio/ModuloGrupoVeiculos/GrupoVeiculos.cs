@@ -5,15 +5,16 @@ namespace LocadoraDeVeiculos.Dominio.ModuloGrupoVeiculos;
 
 public class GrupoVeiculos : EntidadeBase
 {
+    public string Nome { get; set; }
+
+    public List<Veiculo> Veiculos { get; set; } = [];
+
     protected GrupoVeiculos() { }
 
     public GrupoVeiculos(string nome)
     {
         Nome = nome;
     }
-
-    public string Nome { get; set; }
-    public List<Veiculo> Veiculos { get; set; } = [];
 
     public override List<string> Validar()
     {

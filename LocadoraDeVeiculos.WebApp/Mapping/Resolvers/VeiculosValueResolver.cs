@@ -26,7 +26,7 @@ public class VeiculosValueResolver : IValueResolver<Locacao, FormularioLocacaoVi
         }
 
         return _servicoVeiculo
-            .SelecionarTodos()
+            .SelecionarTodos(source.EmpresaId)
             .Value
             .Select(v => new SelectListItem(v.Modelo, v.Id.ToString()));
     }

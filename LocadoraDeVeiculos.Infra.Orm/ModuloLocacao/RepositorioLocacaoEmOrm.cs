@@ -33,4 +33,14 @@ public class RepositorioLocacaoEmOrm : RepositorioBaseEmOrm<Locacao>, IRepositor
             .Include(l => l.ConfiguracaoCombustivel)
             .ToList();
     }
+
+    public List<Locacao> Filtrar(Func<Locacao, bool> predicate)
+    {
+        return ObterRegistros()
+            .Include(l => l.Condutor)
+            .Include(l => l.Veiculo)
+            .Include(l => l.ConfiguracaoCombustivel)
+            .Where(predicate)
+            .ToList();
+    }
 }

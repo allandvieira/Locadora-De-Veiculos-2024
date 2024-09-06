@@ -10,6 +10,7 @@ public class LocacaoProfile : Profile
     public LocacaoProfile()
     {
         CreateMap<InserirLocacaoViewModel, Locacao>()
+            .ForMember(dest => dest.EmpresaId, opt => opt.MapFrom<EmpresaIdValueResolver>())
             .ForMember(l => l.TaxasSelecionadas, opt => opt.MapFrom<TaxasSelecionadasValueResolver>());
 
         CreateMap<RealizarDevolucaoViewModel, Locacao>()

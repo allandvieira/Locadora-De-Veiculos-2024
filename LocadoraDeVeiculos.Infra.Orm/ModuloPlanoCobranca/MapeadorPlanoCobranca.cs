@@ -47,5 +47,15 @@ public class MapeadorPlanoCobranca : IEntityTypeConfiguration<PlanoCobranca>
             .WithMany()
             .HasForeignKey(p => p.GrupoVeiculosId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        builder.Property(s => s.EmpresaId)
+            .HasColumnType("int")
+            .HasColumnName("Empresa_Id")
+            .IsRequired();
+
+        builder.HasOne(g => g.Empresa)
+            .WithMany()
+            .HasForeignKey(s => s.EmpresaId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

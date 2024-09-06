@@ -24,7 +24,7 @@ public class ServicoLocacao
 
     public Result<Locacao> Inserir(Locacao locacao)
     {
-        var config = repositorioCombustivel.ObterConfiguracao();
+        var config = repositorioCombustivel.ObterConfiguracao(locacao.EmpresaId);
 
         if (config is null)
             return Result.Fail("Não foi possível obter a configuração de valores de combustíveis.");
@@ -110,9 +110,9 @@ public class ServicoLocacao
         return Result.Ok(locacao);
     }
 
-    public Result<List<Locacao>> SelecionarTodos()
+    public Result<List<Locacao>> SelecionarTodos(int empresaId)
     {
-        var locacoes = repositorioLocacao.SelecionarTodos();
+        var locacoes = repositorioLocacao.Filtrar(l => l.EmpresaId == empresaId);
 
         return Result.Ok(locacoes);
     }

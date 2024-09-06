@@ -10,7 +10,7 @@ public class AutenticacaoController : WebControllerBase
 {
     private readonly ServicoAutenticacao servicoAutenticacao;
 
-    public AutenticacaoController(ServicoAutenticacao servicoAutenticacao)
+    public AutenticacaoController(ServicoAutenticacao servicoAutenticacao) : base(servicoAutenticacao)
     {
         this.servicoAutenticacao = servicoAutenticacao;
     }

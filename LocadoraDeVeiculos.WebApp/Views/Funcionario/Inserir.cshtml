@@ -1,0 +1,67 @@
+﻿@model InserirFuncionarioViewModel
+
+@{
+    ViewBag.Title = "Inserir Funcionário";
+}
+
+<div class="col">
+    <div class="row gap-3 my-3 my-xl-5">
+        <form class="col-lg-6 d-grid gap-3 fs-5" asp-action="Inserir">
+            <div>
+                <label class="control-label fw-semibold mb-1">Nome Completo</label>
+                <input class="form-control mb-1" asp-for="NomeCompleto" />
+                <span class="text-danger fs-6" asp-validation-for="NomeCompleto"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Nome de Usuário</label>
+                <input class="form-control mb-1"
+                       asp-for="NomeUsuario"
+                       placeholder="Não pode conter espaços ou sinais não alfa-numéricos" />
+                <span class="text-danger fs-6" asp-validation-for="NomeUsuario"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Email</label>
+                <input class="form-control mb-1" asp-for="Email" />
+                <span class="text-danger fs-6" asp-validation-for="Email"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Senha</label>
+                <input class="form-control mb-1" asp-for="Senha" />
+                <span class="text-danger fs-6" asp-validation-for="Senha"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Confirme a Senha</label>
+                <input class="form-control mb-1" asp-for="ConfirmarSenha" />
+                <span class="text-danger fs-6" asp-validation-for="ConfirmarSenha"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Data de Admissão</label>
+                <input class="form-control mb-1" asp-for="Admissao" />
+                <span class="text-danger fs-6" asp-validation-for="Admissao"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Salário</label>
+                <input class="form-control mb-1" asp-for="Salario" />
+                <span class="text-danger fs-6" asp-validation-for="Salario"></span>
+            </div>
+
+            <div class="d-grid gap-2 d-md-block mt-4">
+                <button class="btn btn-primary px-5">
+                    <i class="bi bi-floppy-fill me-1"></i>
+                    Gravar
+                </button>
+
+                <a class="btn btn-outline-primary px-5" asp-action="Listar">
+                    <i class="bi bi-arrow-return-left me-1"></i>
+                    Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

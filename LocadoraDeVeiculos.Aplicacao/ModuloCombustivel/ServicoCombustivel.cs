@@ -21,9 +21,9 @@ public class ServicoCombustivel
         return Result.Ok();
     }
 
-    public Result<ConfiguracaoCombustivel> ObterConfiguracao()
+    public Result<ConfiguracaoCombustivel> ObterConfiguracao(int idEmpresa)
     {
-        var config = repositorioConfig.ObterConfiguracao();
+        var config = repositorioConfig.ObterConfiguracao(idEmpresa);
 
         if (config is null)
         {

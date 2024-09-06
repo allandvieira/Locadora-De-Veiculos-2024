@@ -19,10 +19,10 @@ public class RepositorioConfiguracaoCombustivelEmOrm : IRepositorioConfiguracaoC
         dbContext.SaveChanges();
     }
 
-    public ConfiguracaoCombustivel? ObterConfiguracao()
+    public ConfiguracaoCombustivel? ObterConfiguracao(int idEmpresa)
     {
         return dbContext.ConfiguracoesCombustiveis
             .OrderByDescending(c => c.Id)
-            .FirstOrDefault();
+            .FirstOrDefault(c => c.EmpresaId == idEmpresa);
     }
 }

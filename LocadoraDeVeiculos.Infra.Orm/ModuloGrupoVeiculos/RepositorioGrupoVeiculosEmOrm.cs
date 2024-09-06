@@ -14,4 +14,11 @@ public class RepositorioGrupoVeiculosEmOrm : RepositorioBaseEmOrm<GrupoVeiculos>
     {
         return dbContext.GruposVeiculos;
     }
+
+    public List<GrupoVeiculos> Filtrar(Func<GrupoVeiculos, bool> predicate)
+    {
+        return dbContext.GruposVeiculos
+            .Where(predicate)
+            .ToList();
+    }
 }

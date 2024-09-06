@@ -21,4 +21,11 @@ public class RepositorioTaxaEmOrm : RepositorioBaseEmOrm<Taxa>, IRepositorioTaxa
             .Where(taxa => idsTaxasSelecionadas.Contains(taxa.Id))
             .ToList();
     }
+
+    public List<Taxa> Filtrar(Func<Taxa, bool> predicate)
+    {
+        return ObterRegistros()
+            .Where(predicate)
+            .ToList();
+    }
 }

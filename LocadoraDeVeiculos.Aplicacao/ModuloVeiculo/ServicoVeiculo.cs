@@ -59,9 +59,12 @@ public class ServicoVeiculo
         return Result.Ok(veiculo);
     }
 
-    public Result<List<Veiculo>> SelecionarTodos()
+    public Result<List<Veiculo>> SelecionarTodos(int empresaId)
     {
-        var veiculos = repositorioVeiculo.SelecionarTodos();
+        var veiculos = repositorioVeiculo.Filtrar(
+            l => l.EmpresaId == empresaId &&
+                 l.Alugado == false
+        );
 
         return Result.Ok(veiculos);
     }

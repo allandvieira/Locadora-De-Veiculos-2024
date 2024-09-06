@@ -10,6 +10,7 @@ public class VeiculoProfile : Profile
     public VeiculoProfile()
     {
         CreateMap<InserirVeiculoViewModel, Veiculo>()
+            .ForMember(dest => dest.EmpresaId, opt => opt.MapFrom<EmpresaIdValueResolver>())
             .ForMember(dest => dest.Foto, opt => opt.MapFrom<FotoValueResolver>());
 
         CreateMap<EditarVeiculoViewModel, Veiculo>()

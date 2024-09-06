@@ -18,6 +18,7 @@ public class TaxasValueResolver : IValueResolver<Locacao, FormularioLocacaoViewM
     public IEnumerable<SelectListItem>? Resolve(Locacao source, FormularioLocacaoViewModel destination, IEnumerable<SelectListItem>? destMember,
         ResolutionContext context)
     {
+
         return repositorioTaxa
             .SelecionarTodos()
             .Select(t => new SelectListItem(t.ToString(), t.Id.ToString()));

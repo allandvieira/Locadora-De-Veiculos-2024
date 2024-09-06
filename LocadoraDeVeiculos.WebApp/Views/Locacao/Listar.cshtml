@@ -14,66 +14,62 @@
     <div class="row gap-2 my-3 my-xl-5">
         @foreach (var locacaoVm in Model)
         {
-            <div class="card col-lg-4 col-xl-3 px-0">
-                <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
-                    <h5 class="p-0">Locação #@locacaoVm.Id</h5>
+        <div class="card col-lg-4 col-xl-3 px-0">
+            <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                <h5 class="p-0">Locação #@locacaoVm.Id</h5>
 
-                    <div class="text-end d-flex align-items-center gap-3">
-                        @if (!locacaoVm.DataDevolucao.HasValue)
-                        {
-                            <a title="Realizar Devolução"
-                               class="text-info-emphasis fs-5"
-                               href="/Locacao/RealizarDevolucao/@locacaoVm.Id">
-                                <i class="bi bi-coin"></i>
-                            </a>
-                        }
-                        <a title="Detalhes"
+                <div class="text-end d-flex align-items-center gap-3">
+                    @if (!locacaoVm.DataDevolucao.HasValue)
+                    {
+                        <a title="Realizar Devolução"
                            class="text-info-emphasis fs-5"
-                           href="/Locacao/Detalhes/@locacaoVm.Id">
-                            <i class="bi bi-search"></i>
+                           href="/Locacao/RealizarDevolucao/@locacaoVm.Id">
+                            <i class="bi bi-coin"></i>
                         </a>
-                        @if (!locacaoVm.DataDevolucao.HasValue)
-                        {
-                            <a title="Editar"
-                               class="text-info-emphasis fs-5"
-                               href="/Locacao/Editar/@locacaoVm.Id">
-                                <i class="bi bi-pencil"></i>
-                            </a>
-                        }
-                        @if (locacaoVm.DataDevolucao.HasValue)
-                        {
-                            <a title="Excluir"
-                               class="text-info-emphasis fs-5" href="/Locacao/Excluir/@locacaoVm.Id">
-                                <i class="bi bi-trash-fill"></i>
-                            </a>
-                        }
-                    </div>
-                </div>
-
-                <div class="card-body">
-                    <h5 class="card-title">Veículo: @locacaoVm.Veiculo</h5>
-                    <p class="card-text">
-                        Condutor: @locacaoVm.Condutor <br />
-                        Tipo de Plano: @locacaoVm.TipoPlano <br />
-
-                        <hr>
-
-                        Devolução: @(locacaoVm.DataDevolucao.HasValue ? "Completa" : "Pendente")<br />
-                        Data da Locação: @locacaoVm.DataLocacao.ToShortDateString()<br />
-                        Data Prevista de Devolução: @locacaoVm.DevolucaoPrevista.ToShortDateString()<br />
-
-                        @if (locacaoVm.DataDevolucao.HasValue)
-                        {
-                            <span>Data de Devolução: @locacaoVm.DataDevolucao.Value.ToShortDateString()</span>
-
-                            <br />
-                            <span>Quilometragem Percorrida: @locacaoVm.QuilometragemPercorrida km(s)</span>
-
-                            <br />
-                        }
-                    </p>
+                    }
+                    <a title="Detalhes"
+                       class="text-info-emphasis fs-5"
+                       href="/Locacao/Detalhes/@locacaoVm.Id">
+                        <i class="bi bi-search"></i>
+                    </a>
+                    @if (!locacaoVm.DataDevolucao.HasValue)
+                    {
+                        <a title="Editar"
+                           class="text-info-emphasis fs-5"
+                           href="/Locacao/Editar/@locacaoVm.Id">
+                            <i class="bi bi-pencil"></i>
+                        </a>    
+                    }
+                    @if (locacaoVm.DataDevolucao.HasValue)
+                    {
+                        <a title="Excluir"
+                           class="text-info-emphasis fs-5" href="/Locacao/Excluir/@locacaoVm.Id">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
+                    }
                 </div>
             </div>
+
+            <div class="card-body">
+                <h5 class="card-title">Veículo: @locacaoVm.Veiculo</h5>
+                <p class="card-text">
+                    Condutor: @locacaoVm.Condutor <br />
+                    Tipo de Plano: @locacaoVm.TipoPlano <br />
+
+                    <hr>
+        
+                    Devolução: @(locacaoVm.DataDevolucao.HasValue ? "Completa" : "Pendente")<br />
+                    Data da Locação: @locacaoVm.DataLocacao.ToShortDateString()<br />
+                    Data Prevista de Devolução: @locacaoVm.DevolucaoPrevista.ToShortDateString()<br />
+                    
+                    @if (locacaoVm.DataDevolucao.HasValue)
+                    { 
+                        <span>Data de Devolução: @locacaoVm.DataDevolucao.Value.ToShortDateString()</span><br />
+                        <span>Quilometragem Percorrida: @locacaoVm.QuilometragemPercorrida km(s)</span><br />
+                    }
+                </p>
+            </div>
+        </div>
         }
     </div>
 </div>

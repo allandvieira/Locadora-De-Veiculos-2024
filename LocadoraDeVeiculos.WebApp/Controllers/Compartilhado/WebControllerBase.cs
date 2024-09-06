@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using LocadoraDeVeiculos.Aplicacao.ModuloAutenticacao;
 using LocadoraDeVeiculos.WebApp.Extensions;
 using LocadoraDeVeiculos.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,23 @@ namespace LocadoraDeVeiculos.WebApp.Controllers.Compartilhado;
 
 public abstract class WebControllerBase : Controller
 {
+    protected readonly ServicoAutenticacao servicoAuth;
+
+    protected int? EmpresaId
+    {
+        get
+        {
+            var empresaId = servicoAuth.ObterIdEmpresaAsync(User).Result;
+
+            return empresaId;
+        }
+    }
+
+    protected WebControllerBase(ServicoAutenticacao servicoAuth)
+    {
+        this.servicoAuth = servicoAuth;
+    }
+
     protected IActionResult MensagemRegistroNaoEncontrado(int idRegistro)
     {
         TempData.SerializarMensagemViewModel(new MensagemViewModel

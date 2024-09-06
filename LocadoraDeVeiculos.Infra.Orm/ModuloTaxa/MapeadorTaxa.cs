@@ -26,5 +26,15 @@ public class MapeadorTaxa : IEntityTypeConfiguration<Taxa>
         builder.Property(t => t.TipoCobranca)
             .HasColumnType("int")
             .IsRequired();
+
+        builder.Property(s => s.EmpresaId)
+            .HasColumnType("int")
+            .HasColumnName("Empresa_Id")
+            .IsRequired();
+
+        builder.HasOne(g => g.Empresa)
+            .WithMany()
+            .HasForeignKey(s => s.EmpresaId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

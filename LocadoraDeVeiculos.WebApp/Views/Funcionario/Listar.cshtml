@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ListarFuncionarioViewModel>
+
+@{
+    ViewBag.Title = "Listagem de Funcionários";
+}
+
+<div class="col">
+
+    <a class="btn btn-primary px-4 mt-3" asp-controller="Funcionario" asp-action="Inserir">
+        <i class="bi bi-circle-add"></i>
+        Inserir Novo Funcionário
+    </a>
+
+    <div class="row gap-2 my-3 my-xl-5">
+        @foreach (var funcionarioVm in Model)
+        {
+            <div class="card col-lg-4 col-xl-3">
+                <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                    <h5 class="p-0">@funcionarioVm.Id</h5>
+
+                    <div class="text-end d-flex align-items-center gap-3">
+                        <a title="Detalhes"
+                           class="text-info-emphasis fs-5"
+                           href="/Funcionario/Detalhes/@funcionarioVm.Id">
+                            <i class="bi bi-search"></i>
+                        </a>
+                        <a title="Editar"
+                           class="text-info-emphasis fs-5"
+                           href="/Funcionario/Editar/@funcionarioVm.Id">
+                            <i class="bi bi-pencil-fill"></i>
+                        </a>
+                        <a title="Excluir"
+                           class="text-info-emphasis fs-5" href="/Funcionario/Excluir/@funcionarioVm.Id">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">@funcionarioVm.NomeCompleto</h5>
+                    <p class="card-text">Email: @funcionarioVm.Email</p>
+                    <p class="card-text">Admissão: @funcionarioVm.Admissao.ToShortDateString()</p>
+                    <p class="card-text">Salário: @funcionarioVm.Salario.ToString("C2")</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

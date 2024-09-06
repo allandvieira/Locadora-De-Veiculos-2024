@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LocadoraDeVeiculos.Aplicacao.ModuloAutenticacao;
 using LocadoraDeVeiculos.Aplicacao.ModuloCondutor;
 using LocadoraDeVeiculos.Aplicacao.ModuloLocacao;
 using LocadoraDeVeiculos.Aplicacao.ModuloTaxa;
@@ -6,12 +7,14 @@ using LocadoraDeVeiculos.Aplicacao.ModuloVeiculo;
 using LocadoraDeVeiculos.Dominio.ModuloLocacao;
 using LocadoraDeVeiculos.WebApp.Controllers.Compartilhado;
 using LocadoraDeVeiculos.WebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text.Json;
 
 namespace LocadoraDeVeiculos.WebApp.Controllers;
 
+[Authorize(Roles = "Empresa,Funcionario")]
 public class LocacaoController : WebControllerBase
 {
     private readonly ServicoLocacao servicoLocacao;
@@ -21,12 +24,13 @@ public class LocacaoController : WebControllerBase
     private readonly IMapper mapeador;
 
     public LocacaoController(
+        ServicoAutenticacao servicoAuth,
         ServicoLocacao servicoLocacao,
         ServicoVeiculo servicoVeiculo,
         ServicoCondutor servicoCondutor,
         ServicoTaxa servicoTaxa,
         IMapper mapeador
-    )
+    ) : base(servicoAuth)
     {
         this.servicoLocacao = servicoLocacao;
         this.servicoVeiculo = servicoVeiculo;
@@ -37,7 +41,7 @@ public class LocacaoController : WebControllerBase
 
     public IActionResult Listar()
     {
-        var resultado = servicoLocacao.SelecionarTodos();
+        var resultado = servicoLocacao.SelecionarTodos(EmpresaId.GetValueOrDefault());
 
         if (resultado.IsFailed)
         {
@@ -170,9 +174,9 @@ public class LocacaoController : WebControllerBase
 
     private InserirLocacaoViewModel CarregarDadosFormulario(InserirLocacaoViewModel? formularioVm = null)
     {
-        var condutores = servicoCondutor.SelecionarTodos().Value;
-        var veiculos = servicoVeiculo.SelecionarTodos().Value;
-        var taxas = servicoTaxa.SelecionarTodos().Value;
+        var condutores = servicoCondutor.SelecionarTodos(EmpresaId.GetValueOrDefault()).Value;
+        var veiculos = servicoVeiculo.SelecionarTodos(EmpresaId.GetValueOrDefault()).Value;
+        var taxas = servicoTaxa.SelecionarTodos(EmpresaId.GetValueOrDefault()).Value;
 
         if (formularioVm is null)
             formularioVm = new InserirLocacaoViewModel();
