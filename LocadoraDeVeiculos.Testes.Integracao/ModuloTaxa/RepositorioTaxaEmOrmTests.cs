@@ -1,40 +1,25 @@
 ﻿using FizzWare.NBuilder;
 using LocadoraDeVeiculos.Dominio.ModuloTaxa;
-using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
-using LocadoraDeVeiculos.Infra.Orm.ModuloTaxa;
+using LocadoraDeVeiculos.Testes.Integracao.Compartilhado;
 
 namespace LocadoraDeVeiculos.Testes.Integracao.ModuloTaxa;
 
 [TestClass]
 [TestCategory("Integração")]
-public class RepositorioTaxaEmOrmTests
+public class RepositorioTaxaEmOrmTests : RepositorioEmOrmTestsBase
 {
-    private LocadoraDbContext dbContext;
-    private RepositorioTaxaEmOrm repositorio;
-
-    [TestInitialize]
-    public void Inicializar()
-    {
-        dbContext = new LocadoraDbContext();
-
-        dbContext.Taxas.RemoveRange(dbContext.Taxas);
-
-        repositorio = new RepositorioTaxaEmOrm(dbContext);
-
-        BuilderSetup.SetCreatePersistenceMethod<Taxa>(repositorio.Inserir);
-    }
-
     [TestMethod]
     public void Deve_Inserir_Taxa()
     {
         var taxa = Builder<Taxa>
             .CreateNew()
             .With(t => t.Id = 0)
+            .With(g => g.EmpresaId = usuarioAutenticado.Id)
             .Build();
 
-        repositorio.Inserir(taxa);
+        repositorioTaxa.Inserir(taxa);
 
-        var taxaSelecionada = repositorio.SelecionarPorId(taxa.Id);
+        var taxaSelecionada = repositorioTaxa.SelecionarPorId(taxa.Id);
 
         Assert.IsNotNull(taxaSelecionada);
         Assert.AreEqual(taxa, taxaSelecionada);
@@ -46,14 +31,15 @@ public class RepositorioTaxaEmOrmTests
         var taxa = Builder<Taxa>
             .CreateNew()
             .With(t => t.Id = 0)
+            .With(g => g.EmpresaId = usuarioAutenticado.Id)
             .Persist();
 
         taxa.Nome = "Taxa Atualizada";
         taxa.Valor = 100.0m;
 
-        repositorio.Editar(taxa);
+        repositorioTaxa.Editar(taxa);
 
-        var taxaSelecionada = repositorio.SelecionarPorId(taxa.Id);
+        var taxaSelecionada = repositorioTaxa.SelecionarPorId(taxa.Id);
 
         Assert.IsNotNull(taxaSelecionada);
         Assert.AreEqual(taxa, taxaSelecionada);
@@ -65,13 +51,14 @@ public class RepositorioTaxaEmOrmTests
         var taxa = Builder<Taxa>
             .CreateNew()
             .With(t => t.Id = 0)
+            .With(g => g.EmpresaId = usuarioAutenticado.Id)
             .Persist();
 
-        repositorio.Excluir(taxa);
+        repositorioTaxa.Excluir(taxa);
 
-        var taxaSelecionada = repositorio.SelecionarPorId(taxa.Id);
+        var taxaSelecionada = repositorioTaxa.SelecionarPorId(taxa.Id);
 
-        var taxas = repositorio.SelecionarTodos();
+        var taxas = repositorioTaxa.SelecionarTodos();
 
         Assert.IsNull(taxaSelecionada);
         Assert.AreEqual(0, taxas.Count);

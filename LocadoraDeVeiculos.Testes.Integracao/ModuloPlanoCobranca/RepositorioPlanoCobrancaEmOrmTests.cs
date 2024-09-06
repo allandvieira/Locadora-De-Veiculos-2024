@@ -1,35 +1,14 @@
 ﻿using FizzWare.NBuilder;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoVeiculos;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
-using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
-using LocadoraDeVeiculos.Infra.Orm.ModuloGrupoVeiculos;
-using LocadoraDeVeiculos.Infra.Orm.ModuloPlanoCobranca;
+using LocadoraDeVeiculos.Testes.Integracao.Compartilhado;
 
 namespace LocadoraDeVeiculos.Testes.Integracao.ModuloPlanoCobranca;
 
 [TestClass]
 [TestCategory("Integração")]
-public class RepositorioPlanoCobrancaEmOrmTests
+public class RepositorioPlanoCobrancaEmOrmTests : RepositorioEmOrmTestsBase
 {
-    private LocadoraDbContext dbContext;
-    private RepositorioPlanoCobrancaEmOrm repositorio;
-    private RepositorioGrupoVeiculosEmOrm repositorioGrupos;
-
-    [TestInitialize]
-    public void Inicializar()
-    {
-        dbContext = new LocadoraDbContext();
-
-        dbContext.PlanosCobranca.RemoveRange(dbContext.PlanosCobranca);
-        dbContext.Veiculos.RemoveRange(dbContext.Veiculos);
-        dbContext.GruposVeiculos.RemoveRange(dbContext.GruposVeiculos);
-
-        repositorio = new RepositorioPlanoCobrancaEmOrm(dbContext);
-        repositorioGrupos = new RepositorioGrupoVeiculosEmOrm(dbContext);
-
-        BuilderSetup.SetCreatePersistenceMethod<PlanoCobranca>(repositorio.Inserir);
-        BuilderSetup.SetCreatePersistenceMethod<GrupoVeiculos>(repositorioGrupos.Inserir);
-    }
 
     [TestMethod]
     public void Deve_Inserir_PlanoCobranca()
@@ -37,17 +16,19 @@ public class RepositorioPlanoCobrancaEmOrmTests
         var grupo = Builder<GrupoVeiculos>
             .CreateNew()
             .With(g => g.Id = 0)
+            .With(g => g.EmpresaId = usuarioAutenticado.Id)
             .Persist();
 
         var planoCobranca = Builder<PlanoCobranca>
             .CreateNew()
             .With(p => p.Id = 0)
             .With(p => p.GrupoVeiculosId = grupo.Id)
+            .With(g => g.EmpresaId = usuarioAutenticado.Id)
             .Build();
 
-        repositorio.Inserir(planoCobranca);
+        repositorioPlano.Inserir(planoCobranca);
 
-        var planoCobrancaSelecionado = repositorio.SelecionarPorId(planoCobranca.Id);
+        var planoCobrancaSelecionado = repositorioPlano.SelecionarPorId(planoCobranca.Id);
 
         Assert.IsNotNull(planoCobrancaSelecionado);
         Assert.AreEqual(planoCobranca, planoCobrancaSelecionado);
@@ -59,19 +40,21 @@ public class RepositorioPlanoCobrancaEmOrmTests
         var grupo = Builder<GrupoVeiculos>
             .CreateNew()
             .With(g => g.Id = 0)
+            .With(g => g.EmpresaId = usuarioAutenticado.Id)
             .Persist();
 
         var planoCobranca = Builder<PlanoCobranca>
             .CreateNew()
             .With(p => p.Id = 0)
             .With(p => p.GrupoVeiculosId = grupo.Id)
+            .With(g => g.EmpresaId = usuarioAutenticado.Id)
             .Persist();
 
         planoCobranca.PrecoDiarioPlanoDiario = 200.0m;
 
-        repositorio.Editar(planoCobranca);
+        repositorioPlano.Editar(planoCobranca);
 
-        var planoCobrancaSelecionado = repositorio.SelecionarPorId(planoCobranca.Id);
+        var planoCobrancaSelecionado = repositorioPlano.SelecionarPorId(planoCobranca.Id);
 
         Assert.IsNotNull(planoCobrancaSelecionado);
         Assert.AreEqual(planoCobranca, planoCobrancaSelecionado);
@@ -83,19 +66,21 @@ public class RepositorioPlanoCobrancaEmOrmTests
         var grupo = Builder<GrupoVeiculos>
             .CreateNew()
             .With(g => g.Id = 0)
+            .With(g => g.EmpresaId = usuarioAutenticado.Id)
             .Persist();
 
         var planoCobranca = Builder<PlanoCobranca>
             .CreateNew()
             .With(p => p.Id = 0)
             .With(p => p.GrupoVeiculosId = grupo.Id)
+            .With(g => g.EmpresaId = usuarioAutenticado.Id)
             .Persist();
 
-        repositorio.Excluir(planoCobranca);
+        repositorioPlano.Excluir(planoCobranca);
 
-        var planoCobrancaSelecionado = repositorio.SelecionarPorId(planoCobranca.Id);
+        var planoCobrancaSelecionado = repositorioPlano.SelecionarPorId(planoCobranca.Id);
 
-        var planosCobranca = repositorio.SelecionarTodos();
+        var planosCobranca = repositorioPlano.SelecionarTodos();
 
         Assert.IsNull(planoCobrancaSelecionado);
         Assert.AreEqual(0, planosCobranca.Count);

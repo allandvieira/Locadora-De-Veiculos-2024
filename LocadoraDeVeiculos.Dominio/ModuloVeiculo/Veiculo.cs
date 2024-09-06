@@ -69,11 +69,11 @@ public class Veiculo : EntidadeBase
         {
             case MarcadorCombustivelEnum.Vazio: return CapacidadeTanque;
 
-            case MarcadorCombustivelEnum.UmQuarto: return (CapacidadeTanque - (CapacidadeTanque * 1 / 4));
+            case MarcadorCombustivelEnum.UmQuarto: return CapacidadeTanque - (CapacidadeTanque * (1m / 4m));
 
-            case MarcadorCombustivelEnum.MeioTanque: return (CapacidadeTanque - (CapacidadeTanque * 1 / 2));
+            case MarcadorCombustivelEnum.MeioTanque: return CapacidadeTanque - (CapacidadeTanque * (1m / 2m));
 
-            case MarcadorCombustivelEnum.TresQuartos: return (CapacidadeTanque - (CapacidadeTanque * 3 / 4));
+            case MarcadorCombustivelEnum.TresQuartos: return CapacidadeTanque - (CapacidadeTanque * (3m / 4m));
 
             default:
                 return 0;

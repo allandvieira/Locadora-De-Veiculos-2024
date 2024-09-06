@@ -14,6 +14,7 @@ public class RepositorioClienteEmOrmTests : RepositorioEmOrmTestsBase
         var cliente = Builder<Cliente>
             .CreateNew()
             .With(c => c.Id = 0)
+            .With(g => g.EmpresaId = usuarioAutenticado.Id)
             .Build();
 
         repositorioCliente.Inserir(cliente);
@@ -30,6 +31,7 @@ public class RepositorioClienteEmOrmTests : RepositorioEmOrmTestsBase
         var cliente = Builder<Cliente>
             .CreateNew()
             .With(c => c.Id = 0)
+            .With(g => g.EmpresaId = usuarioAutenticado.Id)
             .Persist();
 
         cliente.Nome = "Nome Atualizado";
@@ -49,6 +51,7 @@ public class RepositorioClienteEmOrmTests : RepositorioEmOrmTestsBase
         var cliente = Builder<Cliente>
             .CreateNew()
             .With(c => c.Id = 0)
+            .With(g => g.EmpresaId = usuarioAutenticado.Id)
             .Persist();
 
         repositorioCliente.Excluir(cliente);
